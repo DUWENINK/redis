@@ -16,5 +16,5 @@ RUN chown redis:redis /usr/local/etc/redis/redis.conf /usr/local/etc/redis/senti
 # 暴露端口
 EXPOSE 6379 6380 6381 26379
 
-# 设置启动命令
-CMD ["redis-server", "/usr/local/etc/redis/redis.conf"] 
+# 设置启动命令，使用 host 网络模式
+CMD ["redis-server", "--network", "host", "/usr/local/etc/redis/redis.conf"] 

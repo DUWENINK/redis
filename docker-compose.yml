@@ -3,88 +3,65 @@ services:
     build: .
     container_name: redis-master
     hostname: redis-master
-    ports:
-      - "6379:6379"
+    network_mode: host
     volumes:
       - redis-master-data:/data
     command: redis-server /usr/local/etc/redis/redis.conf
-    networks:
-      - redis-net
 
   redis-slave1:
     build: .
     container_name: redis-slave1
     hostname: redis-slave1
-    ports:
-      - "6380:6380"
+    network_mode: host
     volumes:
       - redis-slave1-data:/data
     command: redis-server --port 6380 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
-    networks:
-      - redis-net
 
   redis-slave2:
     build: .
     container_name: redis-slave2
     hostname: redis-slave2
-    ports:
-      - "6381:6381"
+    network_mode: host
     volumes:
       - redis-slave2-data:/data
     command: redis-server --port 6381 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
-    networks:
-      - redis-net
 
   sentinel1:
     build: .
     container_name: redis-sentinel1
     hostname: sentinel1
-    ports:
-      - "26379:26379"
+    network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
       - redis-slave2
-    networks:
-      - redis-net
 
   sentinel2:
     build: .
     container_name: redis-sentinel2
     hostname: sentinel2
-    ports:
-      - "26380:26379"
+    network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
       - redis-slave2
-    networks:
-      - redis-net
 
   sentinel3:
     build: .
     container_name: redis-sentinel3
     hostname: sentinel3
-    ports:
-      - "26381:26379"
+    network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
       - redis-slave2
-    networks:
-      - redis-net
-
-networks:
-  redis-net:
-    name: redis-net
-    driver: bridge
 
 volumes:
   redis-master-data:
