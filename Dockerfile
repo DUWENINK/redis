@@ -10,6 +10,9 @@ WORKDIR /usr/local/etc/redis
 COPY redis.conf /usr/local/etc/redis/redis.conf
 COPY sentinel.conf /usr/local/etc/redis/sentinel.conf
 
+# 设置权限
+RUN chown redis:redis /usr/local/etc/redis/redis.conf /usr/local/etc/redis/sentinel.conf
+
 # 暴露端口
 EXPOSE 6379 6380 6381 26379
 
