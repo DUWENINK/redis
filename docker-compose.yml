@@ -9,7 +9,9 @@ services:
       - redis-master-data:/data
     command: redis-server /usr/local/etc/redis/redis.conf
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - redis-master
 
   redis-slave1:
     build: .
@@ -23,7 +25,9 @@ services:
     depends_on:
       - redis-master
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - redis-slave1
 
   redis-slave2:
     build: .
@@ -37,7 +41,9 @@ services:
     depends_on:
       - redis-master
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - redis-slave2
 
   sentinel1:
     build: .
@@ -51,7 +57,9 @@ services:
       - redis-slave1
       - redis-slave2
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - sentinel1
 
   sentinel2:
     build: .
@@ -65,7 +73,9 @@ services:
       - redis-slave1
       - redis-slave2
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - sentinel2
 
   sentinel3:
     build: .
@@ -79,7 +89,9 @@ services:
       - redis-slave1
       - redis-slave2
     networks:
-      - redis-net
+      redis-net:
+        aliases:
+          - sentinel3
 
 networks:
   redis-net:
