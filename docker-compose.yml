@@ -15,7 +15,7 @@ services:
     network_mode: host
     volumes:
       - redis-slave1-data:/data
-    command: redis-server --port 6380 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6380 --slaveof 127.0.0.1 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
 
@@ -26,7 +26,7 @@ services:
     network_mode: host
     volumes:
       - redis-slave2-data:/data
-    command: redis-server --port 6381 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6381 --slaveof 127.0.0.1 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
 
