@@ -2,7 +2,6 @@ services:
   redis-master:
     build: .
     container_name: redis-master
-    hostname: redis-master
     network_mode: host
     volumes:
       - redis-master-data:/data
@@ -11,7 +10,6 @@ services:
   redis-slave1:
     build: .
     container_name: redis-slave1
-    hostname: redis-slave1
     network_mode: host
     volumes:
       - redis-slave1-data:/data
@@ -22,7 +20,6 @@ services:
   redis-slave2:
     build: .
     container_name: redis-slave2
-    hostname: redis-slave2
     network_mode: host
     volumes:
       - redis-slave2-data:/data
@@ -33,7 +30,6 @@ services:
   sentinel1:
     build: .
     container_name: redis-sentinel1
-    hostname: sentinel1
     network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
@@ -44,7 +40,6 @@ services:
   sentinel2:
     build: .
     container_name: redis-sentinel2
-    hostname: sentinel2
     network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
@@ -55,7 +50,6 @@ services:
   sentinel3:
     build: .
     container_name: redis-sentinel3
-    hostname: sentinel3
     network_mode: host
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
