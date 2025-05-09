@@ -2,7 +2,8 @@ services:
   redis-master:
     build: .
     container_name: redis-master
-    network_mode: host
+    networks:
+      - redis-net
     volumes:
       - redis-master-data:/data
     command: redis-server /usr/local/etc/redis/redis.conf
@@ -10,27 +11,30 @@ services:
   redis-slave1:
     build: .
     container_name: redis-slave1
-    network_mode: host
+    networks:
+      - redis-net
     volumes:
       - redis-slave1-data:/data
-    command: redis-server --port 6380 --slaveof 127.0.0.1 6379 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6380 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
 
   redis-slave2:
     build: .
     container_name: redis-slave2
-    network_mode: host
+    networks:
+      - redis-net
     volumes:
       - redis-slave2-data:/data
-    command: redis-server --port 6381 --slaveof 127.0.0.1 6379 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6381 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
 
   sentinel1:
     build: .
     container_name: redis-sentinel1
-    network_mode: host
+    networks:
+      - redis-net
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
@@ -40,7 +44,8 @@ services:
   sentinel2:
     build: .
     container_name: redis-sentinel2
-    network_mode: host
+    networks:
+      - redis-net
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
@@ -50,12 +55,17 @@ services:
   sentinel3:
     build: .
     container_name: redis-sentinel3
-    network_mode: host
+    networks:
+      - redis-net
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
       - redis-slave2
+
+networks:
+  redis-net:
+    driver: bridge
 
 volumes:
   redis-master-data:
