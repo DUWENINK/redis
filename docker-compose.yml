@@ -1,6 +1,8 @@
 services:
   redis-master:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
     container_name: redis-master
     networks:
       - redis-net
@@ -9,7 +11,9 @@ services:
     command: redis-server /usr/local/etc/redis/redis.conf
 
   redis-slave1:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
     container_name: redis-slave1
     networks:
       - redis-net
@@ -20,7 +24,9 @@ services:
       - redis-master
 
   redis-slave2:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
     container_name: redis-slave2
     networks:
       - redis-net
@@ -31,7 +37,9 @@ services:
       - redis-master
 
   sentinel1:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.sentinel
     container_name: redis-sentinel1
     networks:
       - redis-net
@@ -42,7 +50,9 @@ services:
       - redis-slave2
 
   sentinel2:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.sentinel
     container_name: redis-sentinel2
     networks:
       - redis-net
@@ -53,7 +63,9 @@ services:
       - redis-slave2
 
   sentinel3:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.sentinel
     container_name: redis-sentinel3
     networks:
       - redis-net
