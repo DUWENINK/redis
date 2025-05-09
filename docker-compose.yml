@@ -5,7 +5,7 @@ services:
     build: .
     container_name: redis-master
     ports:
-      - "16002:16002"
+      - "6379:6379"
     volumes:
       - redis-master-data:/data
     command: redis-server /usr/local/etc/redis/redis.conf
@@ -16,10 +16,10 @@ services:
     build: .
     container_name: redis-slave1
     ports:
-      - "16003:16003"
+      - "6380:6380"
     volumes:
       - redis-slave1-data:/data
-    command: redis-server --port 16003 --slaveof redis-master 16002 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6380 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
     networks:
@@ -29,10 +29,10 @@ services:
     build: .
     container_name: redis-slave2
     ports:
-      - "16004:16004"
+      - "6381:6381"
     volumes:
       - redis-slave2-data:/data
-    command: redis-server --port 16004 --slaveof redis-master 16002 --requirepass bjtest123 --masterauth bjtest123
+    command: redis-server --port 6381 --slaveof redis-master 6379 --requirepass bjtest123 --masterauth bjtest123
     depends_on:
       - redis-master
     networks:

@@ -11,7 +11,7 @@ COPY redis.conf /usr/local/etc/redis/redis.conf
 COPY sentinel.conf /usr/local/etc/redis/sentinel.conf
 
 # 暴露端口
-EXPOSE 16002 16003 16004 26379
+EXPOSE 6379 6380 6381 26379
 
 # 设置启动命令
 CMD ["redis-server", "/usr/local/etc/redis/redis.conf"] 
