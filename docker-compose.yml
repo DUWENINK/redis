@@ -4,8 +4,6 @@ services:
     container_name: redis-master
     hostname: redis-master
     network_mode: host
-    ports:
-      - "6379:6379"
     volumes:
       - redis-master-data:/data
       - ./redis-master.conf:/usr/local/etc/redis/redis.conf
@@ -16,8 +14,6 @@ services:
     container_name: redis-slave1
     hostname: redis-slave1
     network_mode: host
-    ports:
-      - "6380:6380"
     volumes:
       - redis-slave1-data:/data
       - ./redis-slave1.conf:/usr/local/etc/redis/redis.conf
@@ -30,8 +26,6 @@ services:
     container_name: redis-slave2
     hostname: redis-slave2
     network_mode: host
-    ports:
-      - "6381:6381"
     volumes:
       - redis-slave2-data:/data
       - ./redis-slave2.conf:/usr/local/etc/redis/redis.conf
@@ -44,8 +38,6 @@ services:
     container_name: redis-sentinel1
     hostname: sentinel1
     network_mode: host
-    ports:
-      - "26379:26379"
     volumes:
       - ./sentinel1.conf:/usr/local/etc/redis/sentinel.conf
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
@@ -59,8 +51,6 @@ services:
     container_name: redis-sentinel2
     hostname: sentinel2
     network_mode: host
-    ports:
-      - "26380:26379"
     volumes:
       - ./sentinel2.conf:/usr/local/etc/redis/sentinel.conf
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
@@ -74,8 +64,6 @@ services:
     container_name: redis-sentinel3
     hostname: sentinel3
     network_mode: host
-    ports:
-      - "26381:26379"
     volumes:
       - ./sentinel3.conf:/usr/local/etc/redis/sentinel.conf
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
