@@ -3,6 +3,7 @@ services:
     image: redis:latest
     container_name: redis-master
     hostname: redis-master
+    network_mode: host
     ports:
       - "6379:6379"
     networks:
@@ -16,6 +17,7 @@ services:
     image: redis:latest
     container_name: redis-slave1
     hostname: redis-slave1
+    network_mode: host
     ports:
       - "6380:6380"
     networks:
@@ -31,6 +33,7 @@ services:
     image: redis:latest
     container_name: redis-slave2
     hostname: redis-slave2
+    network_mode: host
     ports:
       - "6381:6381"
     networks:
@@ -46,6 +49,7 @@ services:
     image: redis:latest
     container_name: redis-sentinel1
     hostname: sentinel1
+    network_mode: host
     ports:
       - "26379:26379"
     networks:
@@ -62,6 +66,7 @@ services:
     image: redis:latest
     container_name: redis-sentinel2
     hostname: sentinel2
+    network_mode: host
     ports:
       - "26380:26379"
     networks:
@@ -78,6 +83,7 @@ services:
     image: redis:latest
     container_name: redis-sentinel3
     hostname: sentinel3
+    network_mode: host
     ports:
       - "26381:26379"
     networks:
