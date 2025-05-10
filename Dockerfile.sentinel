@@ -2,6 +2,7 @@ FROM redis:7.0
 
 COPY sentinel.conf /usr/local/etc/redis/sentinel.conf
 
+# 端口将通过命令行参数传入
 EXPOSE 26379
 
 CMD ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"] 

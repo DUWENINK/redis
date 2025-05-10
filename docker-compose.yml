@@ -55,7 +55,7 @@ services:
       - "26379:26379"
     networks:
       - redis-net
-    command: redis-sentinel /usr/local/etc/redis/sentinel.conf --port 26379
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
@@ -71,7 +71,7 @@ services:
       - "26380:26379"
     networks:
       - redis-net
-    command: redis-sentinel /usr/local/etc/redis/sentinel.conf --port 26380
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
@@ -87,7 +87,7 @@ services:
       - "26381:26379"
     networks:
       - redis-net
-    command: redis-sentinel /usr/local/etc/redis/sentinel.conf --port 26381
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     depends_on:
       - redis-master
       - redis-slave1
